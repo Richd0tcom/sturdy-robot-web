@@ -4,10 +4,9 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { InvoicesTable } from "./invoices-table"
 import { api } from "@/lib/api-client"
+import DataFetchWrapper from "@/components/data-fetch-wrapper"
 
-export default async function InvoicesPage() {
-  const invoices = await api.getInvoices()
-
+export default function InvoicesPage() {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
@@ -19,7 +18,17 @@ export default async function InvoicesPage() {
         </Button>
       </div>
       <Suspense fallback={<div>Loading...</div>}>
-        <InvoicesTable invoices={invoices} />
+        <DataFetchWrapper
+          fetch={api.getInvoices}
+          loadingFallback={<div>Loading invoices...</div>}
+          errorFallback={
+            <div className="text-red-500">
+              Failed to load invoices. Please check your API configuration.
+            </div>
+          }
+        >
+          {(invoices) => <InvoicesTable invoices={invoices} />}
+        </DataFetchWrapper>
       </Suspense>
     </div>
   )

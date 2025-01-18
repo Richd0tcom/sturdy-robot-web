@@ -4,10 +4,9 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { CustomersTable } from "./customers-table"
 import { api } from "@/lib/api-client"
+import DataFetchWrapper from "@/components/data-fetch-wrapper"
 
-export default async function CustomersPage() {
-  const customers = await api.getCustomers()
-
+export default function CustomersPage() {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
@@ -19,7 +18,17 @@ export default async function CustomersPage() {
         </Button>
       </div>
       <Suspense fallback={<div>Loading...</div>}>
-        <CustomersTable customers={customers} />
+        <DataFetchWrapper
+          fetch={api.getCustomers}
+          loadingFallback={<div>Loading customers...</div>}
+          errorFallback={
+            <div className="text-red-500">
+              Failed to load customers. Please check your API configuration.
+            </div>
+          }
+        >
+          {(customers) => <CustomersTable customers={customers} />}
+        </DataFetchWrapper>
       </Suspense>
     </div>
   )

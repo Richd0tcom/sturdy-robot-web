@@ -4,10 +4,9 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { ProductsTable } from "./products-table"
 import { api } from "@/lib/api-client"
+import DataFetchWrapper from "@/components/data-fetch-wrapper"
 
-export default async function ProductsPage() {
-  const products = await api.getProducts()
-
+export default function ProductsPage() {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
@@ -19,7 +18,17 @@ export default async function ProductsPage() {
         </Button>
       </div>
       <Suspense fallback={<div>Loading...</div>}>
-        <ProductsTable products={products} />
+        <DataFetchWrapper
+          fetch={api.getProducts}
+          loadingFallback={<div>Loading products...</div>}
+          errorFallback={
+            <div className="text-red-500">
+              Failed to load products. Please check your API configuration.
+            </div>
+          }
+        >
+          {(products) => <ProductsTable products={products} />}
+        </DataFetchWrapper>
       </Suspense>
     </div>
   )
