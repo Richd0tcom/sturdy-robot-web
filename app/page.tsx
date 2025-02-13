@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { api } from "@/lib/api-client"
+import * as api from "@/lib/api-client"
 import Link from "next/link"
 import { BarChart3, Package, Users, FileText } from 'lucide-react'
 import { DashboardClient } from "./dashboard-client"

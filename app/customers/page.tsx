@@ -3,7 +3,7 @@ import { Plus } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { CustomersTable } from "./customers-table"
-import { api } from "@/lib/api-client"
+import * as api from "@/lib/api-client"
 import DataFetchWrapper from "@/components/data-fetch-wrapper"
 
 export default function CustomersPage() {
@@ -27,7 +27,7 @@ export default function CustomersPage() {
             </div>
           }
         >
-          {(customers) => <CustomersTable customers={customers} />}
+          {(customers: any[]) => <CustomersTable customers={customers} />}
         </DataFetchWrapper>
       </Suspense>
     </div>

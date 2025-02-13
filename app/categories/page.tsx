@@ -3,7 +3,7 @@ import { Plus } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { CategoriesTable } from "./categories-table"
-import { api } from "@/lib/api-client"
+import * as api from "@/lib/api-client"
 
 export default async function CategoriesPage() {
   const categories = await api.getCategories()

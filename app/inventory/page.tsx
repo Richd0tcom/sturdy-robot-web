@@ -1,6 +1,6 @@
 import { Suspense } from "react"
 import { InventoryTable } from "./inventory-table"
-import { api } from "@/lib/api-client"
+import * as api from "@/lib/api-client"
 import DataFetchWrapper from "@/components/data-fetch-wrapper"
 
 export default function InventoryPage() {

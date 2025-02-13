@@ -1,3 +1,5 @@
+"use server"
+
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api'
 
 type FetchOptions = {
@@ -25,60 +27,58 @@ async function fetchApi(endpoint: string, options: FetchOptions = {}) {
   return response.json()
 }
 
-export const api = {
-  // Organizations
-  getOrganizations: () => fetchApi('/organizations'),
-  createOrganization: (data: any) => fetchApi('/organizations', { method: 'POST', body: data }),
-  updateOrganization: (id: string, data: any) => fetchApi(`/organizations/${id}`, { method: 'PUT', body: data }),
-  deleteOrganization: (id: string) => fetchApi(`/organizations/${id}`, { method: 'DELETE' }),
+// Organizations
+export const getOrganizations = () => fetchApi('/organizations')
+export const createOrganization = (data: any) => fetchApi('/organizations', { method: 'POST', body: data })
+export const updateOrganization = (id: string, data: any) => fetchApi(`/organizations/${id}`, { method: 'PUT', body: data })
+export const deleteOrganization = (id: string) => fetchApi(`/organizations/${id}`, { method: 'DELETE' })
 
-  // Branches
-  getBranches: () => fetchApi('/branches'),
-  createBranch: (data: any) => fetchApi('/branches', { method: 'POST', body: data }),
-  updateBranch: (id: string, data: any) => fetchApi(`/branches/${id}`, { method: 'PUT', body: data }),
-  deleteBranch: (id: string) => fetchApi(`/branches/${id}`, { method: 'DELETE' }),
+// Branches
+export const getBranches = () => fetchApi('/branches')
+export const createBranch = (data: any) => fetchApi('/branches', { method: 'POST', body: data })
+export const updateBranch = (id: string, data: any) => fetchApi(`/branches/${id}`, { method: 'PUT', body: data })
+export const deleteBranch = (id: string) => fetchApi(`/branches/${id}`, { method: 'DELETE' })
 
-  // Categories
-  getCategories: () => fetchApi('/categories'),
-  createCategory: (data: any) => fetchApi('/categories', { method: 'POST', body: data }),
-  updateCategory: (id: string, data: any) => fetchApi(`/categories/${id}`, { method: 'PUT', body: data }),
-  deleteCategory: (id: string) => fetchApi(`/categories/${id}`, { method: 'DELETE' }),
+// Categories
+export const getCategories = () => fetchApi('/categories')
+export const createCategory = (data: any) => fetchApi('/categories', { method: 'POST', body: data })
+export const updateCategory = (id: string, data: any) => fetchApi(`/categories/${id}`, { method: 'PUT', body: data })
+export const deleteCategory = (id: string) => fetchApi(`/categories/${id}`, { method: 'DELETE' })
 
-  // Products
-  getProducts: () => fetchApi('/products'),
-  createProduct: (data: any) => fetchApi('/products', { method: 'POST', body: data }),
-  updateProduct: (id: string, data: any) => fetchApi(`/products/${id}`, { method: 'PUT', body: data }),
-  deleteProduct: (id: string) => fetchApi(`/products/${id}`, { method: 'DELETE' }),
+// Products
+export const getProducts = () => fetchApi('/products')
+export const createProduct = (data: any) => fetchApi('/products', { method: 'POST', body: data })
+export const updateProduct = (id: string, data: any) => fetchApi(`/products/${id}`, { method: 'PUT', body: data })
+export const deleteProduct = (id: string) => fetchApi(`/products/${id}`, { method: 'DELETE' })
 
-  // Product Versions
-  getProductVersions: (productId: string) => fetchApi(`/products/${productId}/versions`),
-  createProductVersion: (productId: string, data: any) => 
-    fetchApi(`/products/${productId}/versions`, { method: 'POST', body: data }),
+// Product Versions
+export const getProductVersions = (productId: string) => fetchApi(`/products/${productId}/versions`)
+export const createProductVersion = (productId: string, data: any) => fetchApi(`/products/${productId}/versions`, { method: 'POST', body: data })
 
-  // Customers
-  getCustomers: () => fetchApi('/customers'),
-  createCustomer: (data: any) => fetchApi('/customers', { method: 'POST', body: data }),
-  updateCustomer: (id: string, data: any) => fetchApi(`/customers/${id}`, { method: 'PUT', body: data }),
-  deleteCustomer: (id: string) => fetchApi(`/customers/${id}`, { method: 'DELETE' }),
+// Customers
+export const getCustomers = () => fetchApi('/customers')
+export const createCustomer = (data: any) => fetchApi('/customers', { method: 'POST', body: data })
+export const updateCustomer = (id: string, data: any) => fetchApi(`/customers/${id}`, { method: 'PUT', body: data })
+export const deleteCustomer = (id: string) => fetchApi(`/customers/${id}`, { method: 'DELETE' })
 
-  // Invoices
-  getInvoices: () => fetchApi('/invoices'),
-  createInvoice: (data: any) => fetchApi('/invoices', { method: 'POST', body: data }),
-  updateInvoice: (id: string, data: any) => fetchApi(`/invoices/${id}`, { method: 'PUT', body: data }),
-  deleteInvoice: (id: string) => fetchApi(`/invoices/${id}`, { method: 'DELETE' }),
-  getInvoice: (id: string) => fetchApi(`/invoices/${id}`),
+// Invoices
+export const getInvoices = () => fetchApi('/invoices')
+export const createInvoice = (data: any) => fetchApi('/invoices', { method: 'POST', body: data })
+export const updateInvoice = (id: string, data: any) => fetchApi(`/invoices/${id}`, { method: 'PUT', body: data })
+export const deleteInvoice = (id: string) => fetchApi(`/invoices/${id}`, { method: 'DELETE' })
+export const getInvoice = (id: string) => fetchApi(`/invoices/${id}`)
 
-  // Invoice Items
-  getInvoiceItems: (invoiceId: string) => fetchApi(`/invoices/${invoiceId}/items`),
-  
-  // Inventory
-  getInventory: () => fetchApi('/inventory'),
-  updateInventory: (id: string, data: any) => fetchApi(`/inventory/${id}`, { method: 'PUT', body: data }),
-  
-  // Currency
-  getCurrencies: () => fetchApi('/currencies'),
-  
-  // Activity Logs
-  getActivityLogs: () => fetchApi('/activity-logs'),
-}
+// Invoice Items
+export const getInvoiceItems = (invoiceId: string) => fetchApi(`/invoices/${invoiceId}/items`)
+
+// Inventory
+export const getInventory = () => fetchApi('/inventory')
+export const updateInventory = (id: string, data: any) => fetchApi(`/inventory/${id}`, { method: 'PUT', body: data })
+
+// Currency
+export const getCurrencies = () => fetchApi('/currencies')
+
+// Activity Logs
+export const getActivityLogs = () => fetchApi('/activity-logs')
+
 

@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { api } from "@/lib/api-client"
+import * as api from "@/lib/api-client"
 import { useRouter } from "next/navigation"
 
 type Customer = {
@@ -41,7 +41,7 @@ export function CustomersTable({ customers }: { customers: Customer[] }) {
     },
     {
       id: "actions",
-      cell: ({ row }) => {
+      cell: ({ row }: { row: { original: Customer } }) => {
         const customer = row.original
 
         return (

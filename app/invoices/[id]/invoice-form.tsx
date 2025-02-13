@@ -20,7 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { api } from "@/lib/api-client"
+import * as api from "@/lib/api-client"
 import { useRouter } from "next/navigation"
 import { Plus, Trash2 } from 'lucide-react'
 

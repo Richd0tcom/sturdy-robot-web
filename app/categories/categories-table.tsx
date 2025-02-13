@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { api } from "@/lib/api-client"
+import * as api from "@/lib/api-client"
 import { useRouter } from "next/navigation"
 
 type Category = {

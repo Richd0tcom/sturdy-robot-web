@@ -1,9 +1,11 @@
+'use client'
+
 import { Suspense } from "react"
 import { Plus } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { ProductsTable } from "./products-table"
-import { api } from "@/lib/api-client"
+import * as api from "@/lib/api-client"
 import DataFetchWrapper from "@/components/data-fetch-wrapper"
 
 export default function ProductsPage() {
@@ -27,7 +29,7 @@ export default function ProductsPage() {
             </div>
           }
         >
-          {(products) => <ProductsTable products={products} />}
+          {(data) => <ProductsTable products={data} />}
         </DataFetchWrapper>
       </Suspense>
     </div>

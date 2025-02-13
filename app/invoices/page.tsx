@@ -3,7 +3,7 @@ import { Plus } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { InvoicesTable } from "./invoices-table"
-import { api } from "@/lib/api-client"
+import * as api from "@/lib/api-client"
 import DataFetchWrapper from "@/components/data-fetch-wrapper"
 
 export default function InvoicesPage() {
