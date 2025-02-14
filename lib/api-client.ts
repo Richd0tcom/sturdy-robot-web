@@ -46,7 +46,7 @@ export const updateCategory = (id: string, data: any) => fetchApi(`/categories/$
 export const deleteCategory = (id: string) => fetchApi(`/categories/${id}`, { method: 'DELETE' })
 
 // Products
-export const getProducts = () => fetchApi('/products')
+export const getProducts = () => fetchApi('/products/branch/eef92b41-efe4-45f4-b223-4891e285d9a5')
 export const createProduct = (data: any) => fetchApi('/products', { method: 'POST', body: data })
 export const updateProduct = (id: string, data: any) => fetchApi(`/products/${id}`, { method: 'PUT', body: data })
 export const deleteProduct = (id: string) => fetchApi(`/products/${id}`, { method: 'DELETE' })
@@ -56,7 +56,7 @@ export const getProductVersions = (productId: string) => fetchApi(`/products/${p
 export const createProductVersion = (productId: string, data: any) => fetchApi(`/products/${productId}/versions`, { method: 'POST', body: data })
 
 // Customers
-export const getCustomers = () => fetchApi('/customers')
+export const getCustomers = () => fetchApi('/customers/branch/eef92b41-efe4-45f4-b223-4891e285d9a5')
 export const createCustomer = (data: any) => fetchApi('/customers', { method: 'POST', body: data })
 export const updateCustomer = (id: string, data: any) => fetchApi(`/customers/${id}`, { method: 'PUT', body: data })
 export const deleteCustomer = (id: string) => fetchApi(`/customers/${id}`, { method: 'DELETE' })

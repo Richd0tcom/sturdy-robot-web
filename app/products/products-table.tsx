@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { api } from "@/lib/api-client"
+import * as api from "@/lib/api-client"
 import { useRouter } from "next/navigation"
 
 type Product = {
@@ -21,6 +21,15 @@ type Product = {
   base_price: number
   category_id: string
   created_at: string
+  branch_id: string
+  product_type: string
+  service_pricing_model: string
+  default_unit: string
+  is_billable: boolean
+  description: string
+  custom_fields: any
+  updated_at: string
+
 }
 
 export function ProductsTable({ products }: { products: Product[] }) {
@@ -38,8 +47,8 @@ export function ProductsTable({ products }: { products: Product[] }) {
     {
       accessorKey: "base_price",
       header: "Base Price",
-      cell: ({ row }) => {
-        const price = parseFloat(row.getValue("base_price"))
+      cell: ({ row }: { row:  any } ) => {
+        const price = row["base_price"]
         const formatted = new Intl.NumberFormat("en-US", {
           style: "currency",
           currency: "USD",
@@ -49,8 +58,8 @@ export function ProductsTable({ products }: { products: Product[] }) {
     },
     {
       id: "actions",
-      cell: ({ row }) => {
-        const product = row.original
+      cell: ({ row }: { row: any }) => {
+        const product = row
 
         return (
           <DropdownMenu>

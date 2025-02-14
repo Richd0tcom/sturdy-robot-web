@@ -2,27 +2,21 @@ import { Suspense } from "react"
 import { InventoryTable } from "./inventory-table"
 import * as api from "@/lib/api-client"
 import DataFetchWrapper from "@/components/data-fetch-wrapper"
+import { ErrorFallback } from "@/components/error-fallback"
+import { InventoryClient } from "./inventory-client"
 
-export default function InventoryPage() {
-  return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h1 className="text-xl font-bold">Inventory</h1>
-      </div>
+export default async function InventoryPage() {
+  try {
+    const inventory = await api.getInventory()
+
+    return (
       <Suspense fallback={<div>Loading...</div>}>
-        <DataFetchWrapper
-          fetch={api.getInventory}
-          loadingFallback={<div>Loading inventory...</div>}
-          errorFallback={
-            <div className="text-red-500">
-              Failed to load inventory. Please check your API configuration.
-            </div>
-          }
-        >
-          {(inventory) => <InventoryTable inventory={inventory} />}
-        </DataFetchWrapper>
+        <InventoryClient initialInventory={inventory} />
       </Suspense>
-    </div>
-  )
+    )
+  } catch (error) {
+    console.error("Failed to fetch inventory:", error)
+    return <ErrorFallback message="Failed to load inventory. Please try again later." />
+  }
 }
 

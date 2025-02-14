@@ -7,32 +7,21 @@ import Link from "next/link"
 import { ProductsTable } from "./products-table"
 import * as api from "@/lib/api-client"
 import DataFetchWrapper from "@/components/data-fetch-wrapper"
+import { ErrorFallback } from "@/components/error-fallback"
+import { ProductsClient } from "./products-client"
 
-export default function ProductsPage() {
-  return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h1 className="text-xl font-bold">Products</h1>
-        <Button asChild>
-          <Link href="/products/new">
-            <Plus className="mr-2 h-4 w-4" /> Add Product
-          </Link>
-        </Button>
-      </div>
+export default async function ProductsPage() {
+  try {
+    const products = await api.getProducts()
+
+    return (
       <Suspense fallback={<div>Loading...</div>}>
-        <DataFetchWrapper
-          fetch={api.getProducts}
-          loadingFallback={<div>Loading products...</div>}
-          errorFallback={
-            <div className="text-red-500">
-              Failed to load products. Please check your API configuration.
-            </div>
-          }
-        >
-          {(data) => <ProductsTable products={data} />}
-        </DataFetchWrapper>
+        <ProductsClient initialProducts={products} />
       </Suspense>
-    </div>
-  )
+    )
+  } catch (error) {
+    console.error("Failed to fetch products:", error)
+    return <ErrorFallback message="Failed to load products. Please try again later." />
+  }
 }
 
