@@ -13,10 +13,11 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { api } from "@/lib/api-client"
+import * as api  from "@/lib/api-client"
 import { useRouter } from "next/navigation"
 
 const productSchema = z.object({
+  id: z.string().uuid(),
   name: z.string().min(2).max(255),
   sku: z.string().min(2).max(50),
   base_price: z.string().transform((val) => parseFloat(val)),

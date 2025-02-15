@@ -37,7 +37,7 @@ export function CategoriesTable({ categories }: { categories: Category[] }) {
     },
     {
       id: "actions",
-      cell: ({ row }) => {
+      cell: ({ row }: { row:  any }) => {
         const category = row.original
 
         return (

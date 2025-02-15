@@ -37,8 +37,8 @@ export function InvoicesTable({ invoices }: { invoices: Invoice[] }) {
     {
       accessorKey: "total",
       header: "Total",
-      cell: ({ row }) => {
-        const amount = parseFloat(row.getValue("total"))
+      cell: ({ row }: { row:  any }) => {
+        const amount = parseFloat(row["total"])
         const formatted = new Intl.NumberFormat("en-US", {
           style: "currency",
           currency: "USD",
@@ -49,10 +49,10 @@ export function InvoicesTable({ invoices }: { invoices: Invoice[] }) {
     {
       accessorKey: "status",
       header: "Status",
-      cell: ({ row }) => {
+      cell: ({ row }: { row:  any }) => {
         const status = row.getValue("status")
         return (
-          <Badge variant={status === "paid" ? "success" : "secondary"}>
+          <Badge variant={status === "paid" ? "outline" : "secondary"}>
             {status}
           </Badge>
         )
@@ -61,13 +61,13 @@ export function InvoicesTable({ invoices }: { invoices: Invoice[] }) {
     {
       accessorKey: "due_date",
       header: "Due Date",
-      cell: ({ row }) => {
+      cell: ({ row }: { row:  any }) => {
         return new Date(row.getValue("due_date")).toLocaleDateString()
       },
     },
     {
       id: "actions",
-      cell: ({ row }) => {
+      cell: ({ row }: { row:  any }) => {
         const invoice = row.original
 
         return (

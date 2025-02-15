@@ -1,4 +1,4 @@
-import { api } from "@/lib/api-client"
+import * as api from "@/lib/api-client"
 import { ProductForm } from "../product-form"
 
 export default async function EditProductPage({
@@ -7,7 +7,7 @@ export default async function EditProductPage({
   params: { id: string }
 }) {
   const [product, categories] = await Promise.all([
-    api.getProducts().then((products) => 
+    api.getProducts().then((products: any) => 
       products.find((p: any) => p.id === params.id)
     ),
     api.getCategories()

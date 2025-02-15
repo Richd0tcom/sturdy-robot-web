@@ -2,7 +2,7 @@
 
 import { DataTable } from "@/components/ui/data-table"
 import { Button } from "@/components/ui/button"
-import { api } from "@/lib/api-client"
+import * as api from "@/lib/api-client"
 import { useRouter } from "next/navigation"
 
 type InventoryItem = {
@@ -29,8 +29,8 @@ export function InventoryTable({ inventory }: { inventory: InventoryItem[] }) {
     {
       accessorKey: "unit_cost",
       header: "Unit Cost",
-      cell: ({ row }) => {
-        const cost = parseFloat(row.getValue("unit_cost"))
+      cell: ({ row }: { row:  any }) => {
+        const cost = parseFloat(row["unit_cost"])
         const formatted = new Intl.NumberFormat("en-US", {
           style: "currency",
           currency: "USD",
@@ -41,13 +41,13 @@ export function InventoryTable({ inventory }: { inventory: InventoryItem[] }) {
     {
       accessorKey: "last_counted",
       header: "Last Counted",
-      cell: ({ row }) => {
-        return new Date(row.getValue("last_counted")).toLocaleDateString()
+      cell: ({ row }: { row:  any }) => {
+        return new Date(row["last_counted"]).toLocaleDateString()
       },
     },
     {
       id: "actions",
-      cell: ({ row }) => {
+      cell: ({ row }: { row:  any }) => {
         const item = row.original
 
         return (
